@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐐 Pasifika Film Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+        
+        .intro p {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .visualizations {
+            margin: 40px 0;
+        }
+        
+        .visualizations h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .viz-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .viz-card h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .viz-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .features {
+            margin: 40px 0;
+        }
+        
+        .features h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item p {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐐 Pasifika Film Database</h1>
+            <p>Interactive Digital Humanities Platform for Pacific Island Film Research</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="intro">
+                <h2>Welcome to the Pasifika Film Database</h2>
+                <p>
+                    A comprehensive digital humanities project for cataloging, analyzing, and visualizing 
+                    Pacific Island films and cultural data. Explore 104 films from across the Pacific, 
+                    discover cultural connections, and engage with interactive geospatial visualizations.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">104</div>
+                        <div class="stat-label">Films</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Islands</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">22</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="visualizations">
+                <h3>🗺️ Interactive Visualizations</h3>
+                <p>Explore our film database through interactive maps and data visualizations:</p>
+                
+                <div class="viz-grid">
+                    <div class="viz-card" onclick="window.open('enhanced-film-visualizer.html', '_blank')">
+                        <h4>🌊 Island Polygon Map</h4>
+                        <p>Advanced visualization with island polygons, color-coded by film data, indigenous leadership, and release status.</p>
+                        <a href="enhanced-film-visualizer.html" class="btn" target="_blank">Explore Islands</a>
+                    </div>
+                    
+                    <div class="viz-card" onclick="window.open('simple-film-visualizer.html', '_blank')">
+                        <h4>📍 Film Points Map</h4>
+                        <p>Traditional point-based map showing individual film locations with detailed popups and search functionality.</p>
+                        <a href="simple-film-visualizer.html" class="btn" target="_blank">View Films</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h3>✨ Key Features</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h4>🎬 Comprehensive Film Database</h4>
+                        <p>104 Pacific Island films with detailed metadata including release dates, countries, languages, and cultural context.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🗺️ Geospatial Analysis</h4>
+                        <p>Interactive maps with island polygons, film locations, and cultural site overlays for geographic research.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🌺 Cultural Preservation</h4>
+                        <p>Focus on indigenous leadership, traditional knowledge, and cultural heritage documentation.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🔍 Advanced Search</h4>
+                        <p>Filter films by country, island, language, release status, and indigenous leadership.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>📊 Data Analytics</h4>
+                        <p>Statistics dashboard with film counts, geographic distribution, and cultural metrics.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🌐 Open Source</h4>
+                        <p>Built with open source tools and following FAIR CARE principles for data sharing and reuse.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <h3 style="color: #667eea; margin-bottom: 20px;">🚀 Get Started</h3>
+                <p style="margin-bottom: 25px; color: #666;">
+                    Choose your preferred visualization method and start exploring Pacific Island cinema:
+                </p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="enhanced-film-visualizer.html" class="btn" target="_blank">🌊 Island Polygons</a>
+                    <a href="simple-film-visualizer.html" class="btn" target="_blank">📍 Film Points</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                Built with ❤️ for Pacific Island cultural preservation and digital humanities research.<br>
+                <a href="https://github.com/aculich/pasifika-database" target="_blank">View on GitHub</a> | 
+                <a href="https://github.com/aculich/pasifika-database/blob/main/README.md" target="_blank">Documentation</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
