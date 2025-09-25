@@ -1,0 +1,150 @@
+# Large data directories (10GB+ from Google Drive)
+pasifikafilm/
+pasifikageo/
+
+# Python virtual environments
+nodegoat-env/
+baserow-env/
+venv/
+env/
+.venv/
+.env/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Large export directories
+airtable_export/
+airtable_exploration/
+
+# Baserow (large clone, can be re-cloned if needed)
+baserow/
+
+# NodeGoat (can be re-cloned if needed)
+nodegoat/
+1100CC/
+
+# Cache directories
+CACHE/
+cache/
+
+# Storage directories with large files
+STORAGE/
+storage/
+
+# Large binary files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Media files (if any)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.mp3
+*.wav
+*.flac
+
+# Large data files
+*.csv
+*.xlsx
+*.xls
+*.json
+!nodegoat-film-data.json
+!package.json
+!package-lock.json
+
+# Keep important configuration files
+!docker-compose*.yml
+!Dockerfile
+!apache-config.conf
+!init-databases.sql
+
+# Keep important Python scripts
+!*.py
+
+# Keep important documentation
+!*.md
+!*.txt
+!*.html
+
+# Keep important JSON configs
+!app.json
+!*.json
+!nodegoat-film-data.json

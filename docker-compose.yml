@@ -1,0 +1,36 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mariadb:10.9
+    container_name: nodegoat_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: nodegoat_cms
+      MYSQL_USER: nodegoat_user
+      MYSQL_PASSWORD: nodegoat_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./1100CC/setup:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+
+  # PHP/Apache Web Server
+  web:
+    build: .
+    container_name: nodegoat_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./1100CC:/var/1100CC
+      - ./nodegoat:/var/1100CC/nodegoat
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=nodegoat_user
+      - DB_PASSWORD=nodegoat_password
+      - DB_NAME=nodegoat_cms
+
+volumes:
+  mysql_data:

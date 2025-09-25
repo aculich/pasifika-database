@@ -1,0 +1,70 @@
+Okay, so here we are in cursor, hard clone. So that's another tool.
+
+[Elizabeth Fiske] 16:44:18
+I use our phone to copy from Google Drive, and I copied all 9 gigs from this one, and all 10 gigs from this other one.
+
+[Elizabeth Fiske] 16:44:26
+So if I list what's in here… Um, and I do this…
+
+[Elizabeth Fiske] 16:44:32
+Indeed. 20 gigs worth of stuff. Um, so now what I'm going to do is say…
+
+[Elizabeth Fiske] 16:44:45
+Search through the subdirectories. Specific a film and Pacifica Geo.
+
+[Elizabeth Fiske] 16:44:50
+And help me catalog all of the data that's here, and use fair practices and fair care practices. If you're not sure what care is.
+
+[Elizabeth Fiske] 16:44:59
+It's related to FAIR, and go… Google it, search for it. Um… Give us a write-up of how to use fair care principles.
+
+[Elizabeth Fiske] 16:45:08
+In curation of this data set, and… give us a sense of what we have here. So, the… the…
+
+[Elizabeth Fiske] 16:45:16
+The Data Science 5Vs. Uh, what are the 5Bs? Anybody know?
+
+[Elizabeth Fiske] 16:45:21
+Velocity, variety, volume. And there's a couple other Vs. So, characterize the 5B referring to the data that we have here.
+
+[Elizabeth Fiske] 16:45:28
+Um, and anything else that would be useful for us to profile and otherwise understand the data?
+
+[Elizabeth Fiske] 16:45:33
+And put that in a file called data.md. A data markdown file, and then also.
+
+[Elizabeth Fiske] 16:45:43
+Um. That's what we're gonna do. Plan out…
+
+[Elizabeth Fiske] 16:45:47
+What we need to do with this data if we're going to do mapping of this geospatial data.
+
+[Elizabeth Fiske] 16:45:53
+Uh, what are some of the open source tools? Because we're committed to open source.
+
+[Elizabeth Fiske] 16:45:57
+So we don't want to use any commercial tools like ArcGIS, so go search GitHub.
+
+[Elizabeth Fiske] 16:46:01
+For any projects. Uh, that would be helpful for this, and a starting point would be, uh, NodeGoat.
+
+[Elizabeth Fiske] 16:46:11
+So, no goat. I think maybe a tool that we want to use, so really look at that and any other utilities in that ecosystem.
+
+[Elizabeth Fiske] 16:46:19
+And start by just cloning that GitHub repository locally. Building out that project for us.
+
+[Elizabeth Fiske] 16:46:25
+And… getting a first working version of any of the data that's in here that seems relevant to put in NodeGo.
+
+[Elizabeth Fiske] 16:46:34
+Go ahead and just look at their examples. Use our data, and as quick as possible, spin up.
+
+[Elizabeth Fiske] 16:46:41
+A version of no goat running. And it could be directly installed on this Mac laptop.
+
+[Elizabeth Fiske] 16:46:47
+Using, uh, brew and any other Python tools that are installed, make sure to create a VIN.
+
+[Elizabeth Fiske] 16:46:53
+Virtual N for Python, and we also have Docker installed, so if Docker is an approach that NodeGoat works with, that's another way you could deploy.

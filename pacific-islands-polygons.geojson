@@ -1,0 +1,221 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hawaii (Big Island)",
+        "country": "USA",
+        "films": 4
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-155.8, 19.0],
+          [-155.0, 19.0],
+          [-155.0, 20.0],
+          [-155.8, 20.0],
+          [-155.8, 19.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maui",
+        "country": "USA",
+        "films": 3
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-156.7, 20.5],
+          [-156.0, 20.5],
+          [-156.0, 21.0],
+          [-156.7, 21.0],
+          [-156.7, 20.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Molokai",
+        "country": "USA",
+        "films": 4
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-157.2, 21.0],
+          [-156.8, 21.0],
+          [-156.8, 21.2],
+          [-157.2, 21.2],
+          [-157.2, 21.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oahu",
+        "country": "USA",
+        "films": 15
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-158.3, 21.2],
+          [-157.6, 21.2],
+          [-157.6, 21.7],
+          [-158.3, 21.7],
+          [-158.3, 21.2]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New Zealand North Island",
+        "country": "New Zealand",
+        "films": 8
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [174.0, -39.0],
+          [179.0, -39.0],
+          [179.0, -34.0],
+          [174.0, -34.0],
+          [174.0, -39.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Samoa",
+        "country": "Samoa",
+        "films": 3
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-172.5, -14.0],
+          [-171.0, -14.0],
+          [-171.0, -13.5],
+          [-172.5, -13.5],
+          [-172.5, -14.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tonga",
+        "country": "Tonga",
+        "films": 2
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-175.5, -21.5],
+          [-173.5, -21.5],
+          [-173.5, -15.5],
+          [-175.5, -15.5],
+          [-175.5, -21.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fiji",
+        "country": "Fiji",
+        "films": 1
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-180.0, -20.0],
+          [-177.0, -20.0],
+          [-177.0, -16.0],
+          [-180.0, -16.0],
+          [-180.0, -20.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Guam",
+        "country": "USA",
+        "films": 3
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [144.5, 13.0],
+          [145.0, 13.0],
+          [145.0, 13.7],
+          [144.5, 13.7],
+          [144.5, 13.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rapa Nui (Easter Island)",
+        "country": "Chile",
+        "films": 3
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-109.5, -27.2],
+          [-109.0, -27.2],
+          [-109.0, -27.0],
+          [-109.5, -27.0],
+          [-109.5, -27.2]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kiribati",
+        "country": "Kiribati",
+        "films": 1
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [172.0, 1.0],
+          [175.0, 1.0],
+          [175.0, 4.0],
+          [172.0, 4.0],
+          [172.0, 1.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Papua New Guinea",
+        "country": "Papua New Guinea",
+        "films": 2
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [141.0, -12.0],
+          [157.0, -12.0],
+          [157.0, -2.0],
+          [141.0, -2.0],
+          [141.0, -12.0]
+        ]]
+      }
+    }
+  ]
+}
