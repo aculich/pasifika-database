@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pasifika Film Database - Real Island Shapes</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            height: 800px;
+        }
+        
+        .map-container {
+            flex: 2;
+            position: relative;
+        }
+        
+        #mapid {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background: #f8f9fa;
+            overflow-y: auto;
+            border-left: 1px solid #e9ecef;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .control-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats h3 {
+            margin: 0 0 15px 0;
+            color: #495057;
+            font-size: 1.2em;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .film-list {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .film-list h3 {
+            margin: 0;
+            padding: 15px 20px;
+            background: #e9ecef;
+            border-radius: 8px 8px 0 0;
+            color: #495057;
+            font-size: 1.1em;
+        }
+        
+        .search-box {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .films {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .film-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .film-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .film-item:last-child {
+            border-bottom: none;
+        }
+        
+        .film-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .film-details {
+            font-size: 0.9em;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .legend h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        .legend-label {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌺 Pasifika Film Database</h1>
+            <p>Interactive Real Island Shapes Visualization</p>
+        </div>
+        
+        <div class="content">
+            <div class="map-container">
+                <div id="mapid"></div>
+                <div class="loading" id="loading">
+                    Loading real island shapes and film data...
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="visualizationMode">Visualization Mode:</label>
+                        <select id="visualizationMode">
+                            <option value="islands">Real Island Shapes</option>
+                            <option value="films">Film Points</option>
+                            <option value="both">Both Islands & Films</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="colorBy">Color Islands By:</label>
+                        <select id="colorBy">
+                            <option value="films">Number of Films</option>
+                            <option value="region">Pacific Region</option>
+                            <option value="area">Island Size</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <h3>📊 Database Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Films:</span>
+                        <span class="stat-value" id="totalFilms">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Countries:</span>
+                        <span class="stat-value" id="totalCountries">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Islands:</span>
+                        <span class="stat-value" id="totalIslands">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Languages:</span>
+                        <span class="stat-value" id="totalLanguages">-</span>
+                    </div>
+                </div>
+                
+                <div class="film-list">
+                    <h3>🎬 Films by Island</h3>
+                    <div class="search-box">
+                        <input type="text" id="filmSearch" placeholder="Search films...">
+                    </div>
+                    <div class="films" id="filmList">
+                        <!-- Films will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <h4>Legend</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #ff6b6b;"></div>
+            <span class="legend-label">1-2 films</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #ffa726;"></div>
+            <span class="legend-label">3-5 films</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #66bb6a;"></div>
+            <span class="legend-label">6-10 films</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #42a5f5;"></div>
+            <span class="legend-label">10+ films</span>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let map;
+        let filmData = [];
+        let islandData = [];
+        let islandLayers = {};
+        let filmMarkers = {};
+        
+        // Initialize the map
+        function initMap() {
+            map = L.map('mapid').setView([0, 170], 3); // Centered on Pacific Ocean
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        }
+        
+        // Load data
+        async function loadData() {
+            try {
+                // Load film data
+                const filmResponse = await fetch('nodegoat-film-data.json');
+                filmData = await filmResponse.json();
+                
+                // Load real island shapes
+                const islandResponse = await fetch('clean-film-islands.geojson');
+                islandData = await islandResponse.json();
+                
+                console.log(`Loaded ${filmData.length} films and ${islandData.features.length} islands`);
+                
+                // Hide loading indicator
+                document.getElementById('loading').style.display = 'none';
+                
+                // Process and display data
+                processData();
+                updateStatistics();
+                updateFilmList();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loading').innerHTML = 'Error loading data. Please check console.';
+            }
+        }
+        
+        // Process the data and create visualizations
+        function processData() {
+            // Count films per island
+            const filmsPerIsland = {};
+            filmData.forEach(film => {
+                if (film.island) {
+                    const island = normalizeIslandName(film.island);
+                    filmsPerIsland[island] = (filmsPerIsland[island] || 0) + 1;
+                }
+            });
+            
+            // Create island layers with real shapes
+            islandData.features.forEach(feature => {
+                const islandName = feature.properties.name;
+                const normalizedName = normalizeIslandName(islandName);
+                const filmCount = filmsPerIsland[normalizedName] || 0;
+                
+                // Determine color based on film count
+                let color = '#e0e0e0'; // Default gray
+                if (filmCount > 0) {
+                    if (filmCount <= 2) color = '#ff6b6b';
+                    else if (filmCount <= 5) color = '#ffa726';
+                    else if (filmCount <= 10) color = '#66bb6a';
+                    else color = '#42a5f5';
+                }
+                
+                // Create island polygon with real shape
+                const islandLayer = L.geoJSON(feature, {
+                    style: {
+                        fillColor: color,
+                        weight: 2,
+                        opacity: 1,
+                        color: '#333',
+                        dashArray: '3',
+                        fillOpacity: 0.7
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const popupContent = `
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 10px 0; color: #333;">${islandName}</h3>
+                                <p style="margin: 5px 0;"><strong>Region:</strong> ${feature.properties.region}</p>
+                                <p style="margin: 5px 0;"><strong>Area:</strong> ${feature.properties.area.toFixed(1)} km²</p>
+                                <p style="margin: 5px 0;"><strong>Films:</strong> ${filmCount}</p>
+                                ${filmCount > 0 ? `<p style="margin: 5px 0;"><strong>Film Relevance:</strong> Yes</p>` : ''}
+                            </div>
+                        `;
+                        layer.bindPopup(popupContent);
+                    }
+                });
+                
+                islandLayers[islandName] = islandLayer;
+            });
+            
+            // Add island layers to map
+            Object.values(islandLayers).forEach(layer => {
+                layer.addTo(map);
+            });
+            
+            // Create film markers
+            filmData.forEach(film => {
+                if (film.island) {
+                    const coords = getIslandCoordinates(film.island);
+                    if (coords) {
+                        const marker = L.marker(coords).addTo(map);
+                        const popupContent = `
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 10px 0; color: #333;">${film.name}</h3>
+                                <p style="margin: 5px 0;"><strong>Island:</strong> ${film.island}</p>
+                                <p style="margin: 5px 0;"><strong>Country:</strong> ${film.country}</p>
+                                <p style="margin: 5px 0;"><strong>Release:</strong> ${film.release_date}</p>
+                                <p style="margin: 5px 0;"><strong>Leadership:</strong> ${film.indigenous_leadership}</p>
+                                <p style="margin: 5px 0;"><strong>Streaming:</strong> ${film.streaming_platform}</p>
+                            </div>
+                        `;
+                        marker.bindPopup(popupContent);
+                        filmMarkers[film.name] = marker;
+                    }
+                }
+            });
+        }
+        
+        // Normalize island names for matching
+        function normalizeIslandName(name) {
+            if (!name) return '';
+            
+            const mappings = {
+                'big island': 'hawaii',
+                'o\'ahu': 'oahu',
+                'oahu': 'oahu',
+                'rapa nui': 'easter island',
+                'papua new guinea': 'new guinea',
+                'aotearoa': 'new zealand',
+                'te ika-a-māui': 'north island',
+                'te ika-a-māui / north island': 'north island',
+                'manono island': 'manono',
+                'upolu island': 'upolu',
+                'tanna island': 'tanna',
+                'bougainville island': 'bougainville',
+                'goulburn islands': 'goulburn',
+                'satawal': 'satawal',
+                'honolulu': 'oahu',
+                'jarvis': 'jarvis island',
+                'kosrae': 'kosrae',
+                'rotuma': 'rotuma',
+                'saipan': 'saipan',
+                'tongatapu': 'tongatapu',
+                'tuvalu': 'tuvalu',
+                'kiribati': 'kiribati',
+                'guam': 'guam',
+                'maui': 'maui',
+                'molokai': 'molokai',
+                'hawaii': 'hawaii',
+                'north island': 'north island',
+                'australia': 'australia'
+            };
+            
+            const normalized = name.toLowerCase().trim();
+            return mappings[normalized] || normalized;
+        }
+        
+        // Get coordinates for an island (center point for markers)
+        function getIslandCoordinates(islandName) {
+            const normalizedName = normalizeIslandName(islandName);
+            
+            // Find the island in our data
+            const island = islandData.features.find(feature => 
+                normalizeIslandName(feature.properties.name) === normalizedName
+            );
+            
+            if (island) {
+                // Calculate center of the island polygon
+                const coords = island.geometry.coordinates[0];
+                let latSum = 0, lonSum = 0;
+                coords.forEach(coord => {
+                    lonSum += coord[0];
+                    latSum += coord[1];
+                });
+                return [latSum / coords.length, lonSum / coords.length];
+            }
+            
+            return null;
+        }
+        
+        // Update statistics
+        function updateStatistics() {
+            const countries = new Set(filmData.map(f => f.country)).size;
+            const islands = new Set(filmData.map(f => f.island)).size;
+            const languages = new Set(filmData.map(f => f.language)).size;
+            
+            document.getElementById('totalFilms').textContent = filmData.length;
+            document.getElementById('totalCountries').textContent = countries;
+            document.getElementById('totalIslands').textContent = islands;
+            document.getElementById('totalLanguages').textContent = languages;
+        }
+        
+        // Update film list
+        function updateFilmList() {
+            const filmList = document.getElementById('filmList');
+            filmList.innerHTML = '';
+            
+            filmData.forEach(film => {
+                const filmItem = document.createElement('div');
+                filmItem.className = 'film-item';
+                filmItem.innerHTML = `
+                    <div class="film-title">${film.name}</div>
+                    <div class="film-details">
+                        Release: ${film.release_date}<br>
+                        Country: ${film.country}<br>
+                        Island: ${film.island}<br>
+                        Language: ${film.language}<br>
+                        Status: ${film.status}<br>
+                        Leadership: ${film.indigenous_leadership}
+                    </div>
+                `;
+                
+                filmItem.addEventListener('click', () => {
+                    const coords = getIslandCoordinates(film.island);
+                    if (coords) {
+                        map.setView(coords, 8);
+                        // Open popup if marker exists
+                        if (filmMarkers[film.name]) {
+                            filmMarkers[film.name].openPopup();
+                        }
+                    }
+                });
+                
+                filmList.appendChild(filmItem);
+            });
+        }
+        
+        // Event listeners
+        document.getElementById('visualizationMode').addEventListener('change', function() {
+            const mode = this.value;
+            
+            // Clear existing layers
+            Object.values(islandLayers).forEach(layer => map.removeLayer(layer));
+            Object.values(filmMarkers).forEach(marker => map.removeLayer(marker));
+            
+            // Add layers based on mode
+            if (mode === 'islands' || mode === 'both') {
+                Object.values(islandLayers).forEach(layer => layer.addTo(map));
+            }
+            if (mode === 'films' || mode === 'both') {
+                Object.values(filmMarkers).forEach(marker => marker.addTo(map));
+            }
+        });
+        
+        document.getElementById('filmSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filmItems = document.querySelectorAll('.film-item');
+            
+            filmItems.forEach(item => {
+                const title = item.querySelector('.film-title').textContent.toLowerCase();
+                const details = item.querySelector('.film-details').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || details.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Initialize everything
+        initMap();
+        loadData();
+    </script>
+</body>
+</html>
