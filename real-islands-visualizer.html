@@ -343,7 +343,7 @@
                 filmData = await filmResponse.json();
                 
                 // Load real island shapes
-                const islandResponse = await fetch('clean-film-islands.geojson');
+                const islandResponse = await fetch('small-film-islands.geojson');
                 islandData = await islandResponse.json();
                 
                 console.log(`Loaded ${filmData.length} films and ${islandData.features.length} islands`);

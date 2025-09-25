@@ -149,3 +149,5 @@ storage/
 !app.json
 !*.json
 !nodegoat-film-data.json
+*.geojson
+!small-film-islands.geojson
