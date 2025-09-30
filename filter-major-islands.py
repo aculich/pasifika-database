@@ -118,3 +118,4 @@ def filter_major_islands():
 
 if __name__ == "__main__":
     filter_major_islands()
+
